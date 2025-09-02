@@ -1,70 +1,72 @@
 package Aula.src;
 
-public class Pilha implements Epilhavel {
-    // variáveis globais
-    private Object[] dados;
-    private int topo;
-
-    // construtor 
-    public Pilha() {
-        this(10); 
+public class  Pilha implements Empilhavel{
+//variaveis
+private Object dado[];
+private int pointertop;
+//Construtores 
+public Pilha(int tamanho){
+    pointertop=-1;
+    dado=new Object[tamanho];
+}
+public Pilha (){
+    this(10);
+}
+//metodos auxiliares 
+@Override
+public boolean is_full(){
+    return(pointertop==dado.length-1);
+}
+@Override 
+public boolean is_empty(){
+    return(pointertop==-1);
+}
+@Override 
+public String print(){
+    String format="[";
+    for(int i=pointertop; i>=0; i--) {
+        System.out.println(dado[i]);
+        if(i==0){
+            format+=dado[i];
+        }
+        else{
+            format+=dado[i]+",";
+        }  
     }
-    public Pilha(int tamanho) {
-        dados = new Object[tamanho];
-        topo = -1;
-    }
-    // metodos auxiliares
-    @Override
-    public boolean estaCheia(){
-      return (topo==dados.length-1);
-    }
-	  @Override
-    public boolean estaVazia(){
-     return (topo==-1);
-  }
-    @Override
-	  public String imprimir() {
-		String resultado = "[";
-		for(int cont = topo; cont>= 0; cont--) {
-			if (cont == 0) {
-				resultado += dados[cont];
-			}
-			else {
-				resultado += dados[cont] + ",";
-			}
-		}
-		return resultado + "]";
-   }
-  
-    //Metodos principais 
-    @Override
-    public Object Peek(){
-    Object topoDosDados=null;
-      if(!estaVazia()){
-       topoDosDados=dados[topo];
+    return format+ "]";
+}
+// metodos Principais
+@Override
+public Object peek(){
+    Object top= null;
+    if(!is_empty()){
+        top=dado[pointertop];
     }
     else{
-      System.out.println(" A pilha vazia ");
+        System.err.println("A pilha está vazia");
     }
-    return topoDosDados;
-
-    }
-    public void Push(Object dado ){
-      if(!estaCheia()){
-        topo+=1;
-        dados[topo]= dado;
-
-      }
-    }
-    public Object Pop(){
-      Object topoDosDados=null;
-      if(!estaVazia()){
-        topoDosDados=dados[topo];
-        topo-=1;
-      }
-      return topoDosDados;
+    return top;
+}
+@Override
+public void push(Object dado){
+    if(!is_full()){
+        pointertop++;
+        this.dado[pointertop]=dado;
 
     }
 }
+@Override
+public Object pop(){
+    Object top= null;
+    if(!is_empty()){
+        top=dado[pointertop];
+        pointertop--;    
+    }
+    else{
+        System.err.println("A pilha está vazia");
 
+    }
+    return top;
+}
 
+}

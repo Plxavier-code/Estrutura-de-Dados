@@ -1,6 +1,10 @@
 public class Teste {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+    int a, b;
+    a=2;
+b=a%4;
+System.out.println(a);
+
     }
     
 }

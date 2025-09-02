@@ -6,10 +6,17 @@ public class Quest4 {
         Scanner sc= new Scanner(System.in);
      // Variaveis 
      String car[]= new String[10];
-    }
+    
 //receber caracteres
-
-
+   for (int i = 0; i < 10; i++) {
+    System.out.println("Insira o "+i+"°"+ "caractere ");
+    car[i]=sc.nextLine();   
+   }
 //verificar se os caracteres são consoantes
+   for (int i = 0; i <=car.length; i++) {
+     if(car[i]==)
+    
+   }
 //Imprimir consoantes   
+}
 }
