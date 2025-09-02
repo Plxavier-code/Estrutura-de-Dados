@@ -6,7 +6,7 @@ private Object dado[];
 private int pointertop;
 //Construtores 
 public Pilha(int tamanho){
-    pointertop=-1;
+    pointertop=tamanho;
     dado=new Object[tamanho];
 }
 public Pilha (){
@@ -15,16 +15,16 @@ public Pilha (){
 //metodos auxiliares 
 @Override
 public boolean is_full(){
-    return(pointertop==dado.length-1);
+    return(pointertop==0);
 }
 @Override 
 public boolean is_empty(){
-    return(pointertop==-1);
+    return(pointertop==dado.length);
 }
 @Override 
 public String print(){
     String format="[";
-    for(int i=pointertop; i>=0; i--) {
+    for(int i=pointertop; i<=dado.length; i++) {
         System.out.println(dado[i]);
         if(i==0){
             format+=dado[i];
@@ -50,9 +50,10 @@ public Object peek(){
 @Override
 public void push(Object dado){
     if(!is_full()){
-        pointertop++;
+        pointertop--;
         this.dado[pointertop]=dado;
-
+    }else{
+        System.err.println("A pilha está cheia!");
     }
 }
 @Override
@@ -60,7 +61,7 @@ public Object pop(){
     Object top= null;
     if(!is_empty()){
         top=dado[pointertop];
-        pointertop--;    
+        pointertop++;    
     }
     else{
         System.err.println("A pilha está vazia");
