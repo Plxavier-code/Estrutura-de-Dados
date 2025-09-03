@@ -1,21 +1,27 @@
 package Aula.src;
-public class main{
+public class main {
     public static void main(String[] args) {
-        Pilha pilha=new Pilha(8);
-        System.out.println("A Pilha está vazia?"+pilha.is_empty());
-        pilha.push("Oi");
-        pilha.push("tudo");
-        pilha.push("bem,");
-        pilha.push("como");
-        pilha.push("vai");
-        pilha.push("vc");
-        pilha.push("hoje ");
-        pilha.push("?");
-        System.out.println("Conteúdo da pilha: " + pilha.print());
-        System.out.println("Topo da pilha: " + pilha.peek());
-        pilha.push("erro");
-        System.out.println("Elemento removido: " + pilha.pop());
-        System.out.println("Elemento removido: " + pilha.pop());
-        
+        Pilha pilha = new Pilha(6); 
+        pilha.push1("Pedro");
+        pilha.push1("Lucas ");
+        pilha.push1("Vinicius");
+        System.out.println("Topo da Pilha 1: " + pilha.peek1());
+        System.out.println("Elementos Pilha 1: " + pilha.print1());
+
+        System.out.println("desempilhando Pilha 1: " + pilha.pop1());
+        System.out.println("Elementos Pilha 1: " + pilha.print1());
+
+        pilha.push2("Wesley");
+        pilha.push2("Paulo");
+        pilha.push2("Davi");
+        System.out.println("Topo da Pilha 2: " + pilha.peek2());
+        System.out.println("Elementos Pilha 2: " + pilha.print2());
+
+        System.out.println("desempilhando  Pilha 2: " + pilha.pop2());
+        System.out.println("Elementos Pilha 2: " + pilha.print2());
+        pilha.push1("Matheus");
+        pilha.push1("Ana");
+        System.out.println("Elementos Pilha 1: " + pilha.print1());
+        pilha.push1("Cassie"); 
     }
 }
