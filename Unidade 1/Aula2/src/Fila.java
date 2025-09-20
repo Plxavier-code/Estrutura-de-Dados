@@ -1,6 +1,7 @@
 public class Fila implements Emfileravel {
     //Variaveis 
     private Object dado[];
+    private int total_elements;
     private int head;
     private int tail;
     // construtores
@@ -8,6 +9,7 @@ public class Fila implements Emfileravel {
         dado=new Object [tamanho];
         head=0;
         tail=-1;
+        total_elements=0;
     }
     public Fila(){
         this(10);
@@ -15,28 +17,34 @@ public class Fila implements Emfileravel {
     //Metodos auxiliares 
     @Override
      public boolean is_full(){
-        return(tail==dado.length-1);
+        return(total_elements==dado.length);
 
      }
     @Override
      public boolean is_empt(){
-        return(tail==-1);
+        return(total_elements==0);
 
      }
     @Override
     public String print(){
         String format="[";
-        for (int i = head; i <=tail; i++) {
-            if(i==head){
-                format+=dado[i];
+        int aux=head;
+        for (int i = head; i < total_elements; i++) {
+            if(i!=total_elements){
+                format+=",";
+                aux=next(aux);
             }
             else{
-                format+=dado[i]+",";
+                format+=dado.length+",";
             }
         }
         return format+"]";
+
     }
-     //Metodos auxiliares 
+    public int next(int index){
+        return(index+1)%dado.length;
+    }
+     //Metodos Principais
      @Override
      public  Object front(){
         Object front =null;
@@ -49,10 +57,14 @@ public class Fila implements Emfileravel {
         return  front;
      }
      @Override 
-     public void emqueue(Object dado){
+     public void enqueue(Object dado){
         if(!is_full()){
-            tail++;
+            tail=next(tail);
             this.dado[tail]=dado;
+            total_elements ++;
+        }
+        else{
+            System.err.println("fila esta cheia");
         }
      }
      @Override 
@@ -60,7 +72,8 @@ public class Fila implements Emfileravel {
         Object front=null;
         if(!is_empt()){
             front=dado[head];
-            head++;
+            head=next(head);
+            total_elements --;
         }
         return front;
      }

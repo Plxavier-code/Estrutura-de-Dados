@@ -11,10 +11,11 @@ public interface Emfileravel {
     String print();
 
     //metodos principais:
-    // Frente da fila 
+    // Frente da fila
+
     Object front();
     //Emfilerar
-    void emqueue(Object dado);
+    void enqueue(Object dado);
     //Desemfilerar
     Object dequeue();
 
