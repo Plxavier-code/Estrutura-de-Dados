@@ -1,0 +1,25 @@
+public interface Enfileravel<T>{
+    //metodos auxiliares:
+    
+    /*está cheio*/
+     boolean is_full();
+     
+    /*esta vazio */ 
+    boolean is_empty();
+    
+    /*imprimir  */ 
+    String print();
+    
+    //metodos principais:
+
+    /*Espiar  */  
+    T peek();
+    
+    /*Empilhar  */ 
+    void push(T dado);
+    
+    /*Desempilhar */
+    T pop();
+    
+}
+
