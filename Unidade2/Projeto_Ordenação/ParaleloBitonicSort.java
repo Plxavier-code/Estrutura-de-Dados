@@ -1,4 +1,5 @@
 //Bibliotecas
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 public class ParaleloBitonicSort extends RecursiveAction {
     //Variaveis: 
@@ -13,6 +14,12 @@ public class ParaleloBitonicSort extends RecursiveAction {
         this.initialindex=initialindex;
         this.elements=elements;
         this.guidance=guidance;
+
+    }
+      public static void sort(int[] array) {
+        ForkJoinPool pool = new ForkJoinPool();
+        ParaleloBitonicSort tarefa = new ParaleloBitonicSort(array, 0, array.length, true);
+        pool.invoke(tarefa);
     }
     /* 
     **
