@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        int[] tamanhos = {10, 100, 1000};
+        int[] tamanhos = {10, 100, 1000, 10000};
         int repeticoes = 10;
         Random random = new Random();
 
