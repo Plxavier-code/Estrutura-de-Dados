@@ -1,4 +1,4 @@
-public interface emfilheravel <T> {
+public interface enfileravel <T> {
      /*está cheio*/
      boolean is_full();
     
@@ -12,10 +12,10 @@ public interface emfilheravel <T> {
     T peek();
     
     /*Empilhar  */ 
-    void push(T dado);
+    void enqueue(T data);
     
     /*Desempilhar */
-    T pop();
+    T dequeue();
     /*Atualizar */
     void update(T data);
 
