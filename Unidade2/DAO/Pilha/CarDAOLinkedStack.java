@@ -1,5 +1,5 @@
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
 
 public class CarDAOLinkedStack implements CarDAO {
     private int amount;
@@ -15,7 +15,7 @@ public class CarDAOLinkedStack implements CarDAO {
     @Override
     public Car getCar(String plateLicense) {
         Stackable<Car> temp =new LinkedStack<>(20);
-        Car resultcar;
+        Car resultcar=null;
          while(cars.isEmpty()){
             Car car=cars.pop();
             if(car.getLicensePlate()==plateLicense){
@@ -40,7 +40,7 @@ public class CarDAOLinkedStack implements CarDAO {
     @Override
     public void updateCar(Car newCar) {
         Stackable<Car> temp =new LinkedStack<>(20);
-        while(cars.isEmpty()){
+        while(!cars.isEmpty()){
             Car car=cars.pop();
             if(car.getLicensePlate()==newCar.getLicensePlate()){
                 temp.push(newCar);
@@ -57,8 +57,8 @@ public class CarDAOLinkedStack implements CarDAO {
     @Override
     public Car deleteCar(String plateLicense) {
        Stackable<Car> temp =new LinkedStack<>(20);
-       Car resultcar;
-        while(cars.isEmpty()){
+       Car resultcar=null;
+        while(!cars.isEmpty()){
             Car car=cars.pop();
             if(car.getLicensePlate()==plateLicense){
                 resultcar=car;
@@ -77,8 +77,8 @@ public class CarDAOLinkedStack implements CarDAO {
     @Override
     public Car getCarByLicensePlate(String licensePlate) {
          Stackable<Car> temp =new LinkedStack<>(20);
-        Car resultcar;
-         while(cars.isEmpty()){
+        Car resultcar=null;
+         while(!cars.isEmpty()){
             Car car=cars.pop();
             if(car.getLicensePlate()==licensePlate){
             resultcar=car;
@@ -272,29 +272,55 @@ public class CarDAOLinkedStack implements CarDAO {
 
     @Override
     public String getMostPopularMark() {
-        
+         Stackable<Car> temp1 = new LinkedStack<>(20);
+
+    String markMaisPopular = null;
+    int maiorContagem = 0;
+    while (!cars.isEmpty()) {
+
+        Car atual = cars.pop();
+        temp1.push(atual);
+
+        String Atual = atual.getMark();
+
+        int contador = 1;
+        while (!cars.isEmpty()) {
+            Car outro = cars.pop();
+            temp1.push(outro);
+
+            if (Atual != null && Atual.equals(outro.getMark())) {
+                contador++;
+            }
+        }
+        while (!temp1.isEmpty()) {
+            cars.push(temp1.pop());
+        }
+        if (contador > maiorContagem) {
+            maiorContagem = contador;
+            markMaisPopular = Atual;
+        }
+    }
+
+    return markMaisPopular;
     }
 
     @Override
     public String getMostPopularModel() {
-       if (stackCars.isEmpty()) {
-        return null;
-    }
-
+     
     Stackable<Car> temp1 = new LinkedStack<>(20);
 
     String modeloMaisPopular = null;
     int maiorContagem = 0;
-    while (!stackCars.isEmpty()) {
+    while (!cars.isEmpty()) {
 
-        Car atual = stackCars.pop();
+        Car atual = cars.pop();
         temp1.push(atual);
 
         String modeloAtual = atual.getModel();
 
         int contador = 1;
-        while (!stackCars.isEmpty()) {
-            Car outro = stackCars.pop();
+        while (!cars.isEmpty()) {
+            Car outro = cars.pop();
             temp1.push(outro);
 
             if (modeloAtual != null && modeloAtual.equals(outro.getModel())) {
@@ -302,7 +328,7 @@ public class CarDAOLinkedStack implements CarDAO {
             }
         }
         while (!temp1.isEmpty()) {
-            stackCars.push(temp1.pop());
+            cars.push(temp1.pop());
         }
         if (contador > maiorContagem) {
             maiorContagem = contador;
@@ -311,78 +337,242 @@ public class CarDAOLinkedStack implements CarDAO {
     }
 
     return modeloMaisPopular;
-    }
-
+}
     @Override
     public String getMostPopularColor() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+    Stackable<Car> temp1 = new LinkedStack<>(20);
+
+    String corMaisPopular = null;
+    int maiorContagem = 0;
+    while (!cars.isEmpty()) {
+
+        Car atual = cars.pop();
+        temp1.push(atual);
+
+        String corAtual = atual.getModel();
+
+        int contador = 1;
+        while (!cars.isEmpty()) {
+            Car outro = cars.pop();
+            temp1.push(outro);
+
+            if (corAtual != null && corAtual.equals(outro.getColor())) {
+                contador++;
+            }
+        }
+        while (!temp1.isEmpty()) {
+            cars.push(temp1.pop());
+        }
+        if (contador > maiorContagem) {
+            maiorContagem = contador;
+            corMaisPopular = corAtual;
+        }
+    }
+    return corMaisPopular;
     }
 
     // Operações de gerenciamento
+    /*
+     */
     @Override
     public boolean isCarInPlaced(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+          Stackable<Car> temp =new LinkedStack<>(20);
+        boolean resultcar=false;
+         while(!cars.isEmpty()){
+            Car car=cars.pop();
+            if(car.getLicensePlate()==plateLicense){
+            temp.push(car);
+            resultcar=true;
+            break;
+            }else{
+                temp.push(car);
+            }
+        }
+        while(!temp.isEmpty()){
+            cars.push(temp.pop());
+        }
+        return resultcar;
     }
+    
 
     @Override
     public void clearAllCars() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+         while(!cars.isEmpty()){
+            Car car=cars.pop();
+            
     }
+}
 
     @Override
     public void removeCarsOlderThan(LocalDateTime date) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+    Stackable<Car> temp =new LinkedStack<>(20);
+         while(!cars.isEmpty()){
+            Car car=cars.pop();
+            if(!car.getArrived().isBefore(date)){
+            temp.push(car);
+            break;
+        }
+        while(!temp.isEmpty()){
+            cars.push(temp.pop());
+        }
+    }
     }
 
     @Override
     public Car[] getCarsByParkingDuration(long minHours, long maxHours) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+      Stackable<Car>temp= new LinkedStack<>(20);
+        Stackable<Car>aux= new LinkedStack<>(20);
+      LocalDateTime atual=LocalDateTime.now();
+      while(!cars.isEmpty()){
+        Car car=cars.pop();
+        temp.push(car);
+        if(car.getArrived()!=null){
+            long dur=Duration.between(car.getArrived(), atual ).toHours();
+            if(dur>=minHours && dur<=maxHours){
+                aux.push(car);
+            }
+        }
+
+      }
+      return stackToArray(aux);
     }
 
     @Override
     public int getAvailableSpaces() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
-    }
+       return getMaxCapacity()-countElements(cars);
+        }
 
     @Override
     public boolean isParkingEmpty() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        return cars.isEmpty();
     }
 
     @Override
     public int getMaxCapacity() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        Stackable<Car>temp=new LinkedStack<>();
+        int cont=0;
+        Car phaton=new Car("xxxx","xxxx","xxxxxx");
+        while(!cars.isEmpty()){
+            Car car=cars.pop();
+            temp.push(car);
+        }
+        while(!cars.isFull()){
+            cars.push(phaton);
+            cont++;
+        } while(!cars.isEmpty()){
+            cars.pop();
     }
+    while(!temp.isEmpty()){
+        cars.push(temp.pop());
+    }
+    return cont;
+}
 
     @Override
     public int getOccupancyRate() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+      int cap=getMaxCapacity();
+      int atual= countElements(cars);
+      if(cap==0){
+        return 0;
+      }
+      return (atual*100)/cap;
     }
 
     @Override
     public boolean isParkingFull() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+    return cars.isFull();
     }
 
     @Override
     public long getParkingDuration(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+         Stackable<Car>temp= new LinkedStack<>(20);
+        Stackable<Car>aux= new LinkedStack<>(20);
+      LocalDateTime atual=LocalDateTime.now();
+      long dur=0;
+      while(!cars.isEmpty()){
+        Car car=cars.pop();
+        temp.push(car);
+        if(car.getLicensePlate().equals(plateLicense)){
+        if(car.getArrived()!=null){
+        dur=Duration.between(car.getArrived(), atual ).toHours();
     }
+}
+}
+return dur;
+}
 
     @Override
     public void removeCarsByOwner(String owner) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        Stackable<Car> temp =new LinkedStack<>(20);
+        while(!cars.isEmpty()){
+            Car car=cars.pop();
+            if(!car.getOwnerName().equalsIgnoreCase(owner)){
+            temp.push(car);
+        }
     }
+        while(!temp.isEmpty()){
+            cars.push(temp.pop());
+        
+    }
+}
 
     @Override
     public long getAverageArrivalTime() {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+    if (cars.isEmpty()) {
+        return 0;
     }
+
+    Stackable<Car> temp = new LinkedStack<>(20);
+
+    long soma = 0;
+    int qtd = 0;
+
+    while (!cars.isEmpty()) {
+        Car car = cars.pop();
+        temp.push(car);
+
+        if (car.getArrived() != null) {
+            soma += car.getArrived().atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
+            qtd++;
+        }
+    }
+
+    while (!temp.isEmpty()) {
+        cars.push(temp.pop());
+    }
+
+    return (qtd == 0 ? 0 : soma / qtd);
+}
+
+    
 
     @Override
     public Car[] getCarsWithLongParking(long thresholdHours) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+    Stackable<Car> temp = new LinkedStack<>(20);
+    Stackable<Car> result = new LinkedStack<>(20);
+
+    LocalDateTime agora = LocalDateTime.now();
+
+    while (!cars.isEmpty()) {
+        Car car = cars.pop();
+        temp.push(car);
+
+        if (car.getArrived() != null) {
+            long horas = Duration.between(car.getArrived(), agora).toHours();
+            if (horas >= thresholdHours) {
+                result.push(car);
+            }
+        }
     }
+
+    while (!temp.isEmpty()) {
+        cars.push(temp.pop());
+    }
+
+    return stackToArray(result);
+}
+
+    
     private Car[] stackToArray(Stackable<Car> stack) {
     int size = countElements(stack);
     Car[] resultArrayCars = new Car[size];
@@ -400,14 +590,6 @@ public class CarDAOLinkedStack implements CarDAO {
     }
 
     return resultArrayCars;
-}
-
-private Stackable<Car> arrayToStack(Car[] cars) {
-    Stackable<Car> resultStackCars = new LinkedStack<>(cars.length);
-    for (Car car : cars) {
-        resultStackCars.push(car);
-    }
-    return resultStackCars;
 }
 
 private int countElements(Stackable<Car> stack) {

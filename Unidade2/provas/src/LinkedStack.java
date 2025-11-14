@@ -1,4 +1,6 @@
 import java.util.NoSuchElementException;
+
+import Pilha.DoubleNode;
 public class LinkedStack <T> implements empilhavel <T> {
     //Variaveis 
     private DoubleNode<T> top;

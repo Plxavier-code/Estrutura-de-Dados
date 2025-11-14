@@ -1,5 +1,7 @@
 import java.util.NoSuchElementException;
 
+import Pilha.DoubleNode;
+
 public class LinkedEnqueue <T> implements enfileravel <T> {
     private DoubleNode<T> head;
     private DoubleNode<T> tail;

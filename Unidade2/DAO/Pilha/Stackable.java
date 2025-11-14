@@ -1,3 +1,4 @@
+
 public interface Stackable<T> {
     void push(T data);      //C
     T peek();               //R

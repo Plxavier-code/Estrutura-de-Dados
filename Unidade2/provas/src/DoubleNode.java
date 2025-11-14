@@ -1,3 +1,5 @@
+import Pilha.DoubleNode;
+
 public class DoubleNode<T> {
     // Variáveis de instância
     private DoubleNode<T> previous;

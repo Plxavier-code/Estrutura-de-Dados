@@ -1,5 +1,5 @@
 import java.util.NoSuchElementException;
-public class LinkedStack<T> implements Stackable<T> {
+public class LinkedStack <T> implements Stackable<T> {
 	/** Ponteiro para o topo da pilha */
 	private DoubleNode<T> topPointer;
 
